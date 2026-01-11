@@ -8,12 +8,6 @@ import { toast, Toaster } from 'sonner'
 
 const BRAND_RED = '#C81F2D';
 
-export const metadata = {
-  title: "Product Catalog | R&T Marketing",
-  description: "Browse our premium crockery collection"
-}
-
-
 type Product = {
   id: string
   name: string
