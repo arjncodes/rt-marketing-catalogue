@@ -13,6 +13,12 @@ import Image from 'next/image';
 import { uploadProductImage, deleteProductImage } from '@/lib/utils/supabase-storage';
 import { productSchema } from '@/lib/validations/product';
 
+export const metadata = {
+  title: "Admin Panel | R&T Marketing",
+  description: "Manage products and categories"
+}
+
+
 // Color Presets - 22 Beautiful Colors
 const COLOR_PRESETS = [
   { name: "Red", value: "#EF4444" },
