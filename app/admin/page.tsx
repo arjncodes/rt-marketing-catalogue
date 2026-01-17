@@ -93,12 +93,12 @@ export default function AdminDashboard() {
   // Form state
   const [formData, setFormData] = useState({
     name: '',
-    product_code: '',
     category_id: '',
     price: '',
     qty_per_box: '',
     image: null as File | null,
   });
+
   const [formErrors, setFormErrors] = useState<any>({});
   const [uploading, setUploading] = useState(false);
   const [notification, setNotification] = useState<{type: 'success' | 'error', message: string} | null>(null);
@@ -252,7 +252,7 @@ export default function AdminDashboard() {
 
       const productData = {
         name: formData.name,
-        product_code: formData.product_code.toUpperCase(),
+        product_code: `${formData.category_id.substring(0, 3)}-${Math.random().toString(36).substring(2, 8)}`.toUpperCase(),  // Auto-generate
         category_id: formData.category_id,
         price: parseFloat(formData.price),
         qty_per_box: formData.qty_per_box,
@@ -294,7 +294,6 @@ export default function AdminDashboard() {
   const resetForm = () => {
     setFormData({
       name: '',
-      product_code: '',
       category_id: '',
       price: '',
       qty_per_box: '',
@@ -303,11 +302,11 @@ export default function AdminDashboard() {
     setFormErrors({});
   };
 
+
   const handleEdit = (product: Product) => {
     setEditingProduct(product);
     setFormData({
       name: product.name,
-      product_code: product.product_code,
       category_id: product.category_id,
       price: product.price.toString(),
       qty_per_box: product.qty_per_box,
@@ -1071,18 +1070,6 @@ export default function AdminDashboard() {
               </div>
 
               <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Product Code *</label>
-                  <input
-                    type="text"
-                    value={formData.product_code}
-                    onChange={(e) => setFormData({ ...formData, product_code: e.target.value.toUpperCase() })}
-                    placeholder="800A1ACE"
-                    className="w-full px-4 py-2.5 border rounded-lg font-mono text-sm focus:ring-2 focus:ring-red-500 focus:border-transparent"
-                    required
-                  />
-                  {formErrors.product_code && <p className="text-red-600 text-xs mt-1">{formErrors.product_code}</p>}
-                </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Category *</label>
